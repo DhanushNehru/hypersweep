@@ -1,0 +1,28 @@
+name: 'HyperSweep Link Checker'
+description: 'A blazing-fast, concurrent link checker built in Go without 3rd-party dependencies.'
+branding:
+  icon: 'link'
+  color: 'blue'
+inputs:
+  path:
+    description: 'Path or directory to scan for files (defaults to repository root)'
+    required: false
+    default: '.'
+  workers:
+    description: 'Number of concurrent workers for HTTP requests'
+    required: false
+    default: '50'
+  timeout:
+    description: 'Timeout for each HTTP request (in seconds)'
+    required: false
+    default: '10'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - -path
+    - ${{ inputs.path }}
+    - -workers
+    - ${{ inputs.workers }}
+    - -timeout
+    - ${{ inputs.timeout }}
